@@ -137,7 +137,7 @@ RUN sudo apt-get install -y libpq-dev \
   libxml2-dev libssh2-1-dev
 
 # RUN sudo apt-get -y  install texlive-latex-base
-RUN sudo apt-get install -y texlive
+RUN sudo apt-get install -y texlive-full
 
 #R Packages
 COPY instala_paquetes.R /home/rstudio/instala_paquetes.R
