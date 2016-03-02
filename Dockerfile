@@ -4,7 +4,10 @@ MAINTAINER "Carlos Petricioli" carpetri@gmail.com
 RUN useradd docker \
   && mkdir /home/docker \
   && chown docker:docker /home/docker \
-  && addgroup docker staff
+  && addgroup docker staff \
+  && adduser docker sudo
+
+RUN echo 'docker  ALL=(ALL:ALL) ALL' >> /etc/sudoers
 
 RUN apt-get update \ 
   && apt-get install -y \
@@ -138,6 +141,19 @@ RUN sudo apt-get install -y libpq-dev \
 
 # RUN sudo apt-get -y  install texlive-latex-base
 RUN sudo apt-get install -y texlive-full
+
+# GEOS
+RUN sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
+RUN sudo apt-get update
+RUN sudo apt-get install -y  libgeos-dev \
+  libproj-dev \
+  libgdal-dev \
+  libgdal-doc \
+  gdal-bin \
+  grass \
+  proj-bin \
+  proj-data \
+  python-gdal
 
 #R Packages
 COPY instala_paquetes.R /home/rstudio/instala_paquetes.R
